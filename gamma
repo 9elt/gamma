@@ -1,0 +1,11 @@
+#!/bin/bash
+
+gamma='0.5:1.2:0.5'
+
+if [[ "$1" ]]; then
+    xrandr --output DP-4 --gamma 1:1:1
+    xrandr --output HDMI-0 --gamma 1:1:1
+else
+    xrandr --output DP-4 --gamma "$gamma"
+    xrandr --output HDMI-0 --gamma "$gamma"
+fi
