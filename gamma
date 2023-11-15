@@ -1,11 +1,17 @@
 #!/bin/bash
 
-gamma='0.5:1.2:0.5'
+R='0.5'
+G='1.2'
+B='0.5'
+
+set_gamma() {
+    for display in $(xrandr | grep ' connected' | sed 's/\s.*$//'); do
+        xrandr --output "$display" --gamma "$1" || echo "$display error"
+    done
+}
 
 if [[ "$1" ]]; then
-    xrandr --output DP-4 --gamma 1:1:1
-    xrandr --output HDMI-0 --gamma 1:1:1
+    set_gamma '1:1:1'
 else
-    xrandr --output DP-4 --gamma "$gamma"
-    xrandr --output HDMI-0 --gamma "$gamma"
+    set_gamma "$R:$G:$B"
 fi
